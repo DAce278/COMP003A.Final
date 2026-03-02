@@ -27,9 +27,9 @@ namespace COMP003A.Final
         public bool Sex;
         public bool PreviouslyVolunteered;
         public bool AttendingClasses;
-        public bool Over16;
+        public bool OverReqAge;
 
-        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool attendingClasses, bool over16)
+        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool attendingClasses, bool overReqAge)
         {
             Name = name;
             Race = race;
@@ -50,31 +50,9 @@ namespace COMP003A.Final
             Sex = sex;
             PreviouslyVolunteered = previouslyVolunteered;
             AttendingClasses = attendingClasses;
-            Over16 = over16;
+            OverReqAge = overReqAge;
 
-     //       List<Volunteer> volunteers = new List<Volunteer>();
-      //      volunteers.Add(volunteer1);
+
         }
-          //  Volunteer volunteer1 = new("name", "race", "eye", "hair", "town", "origin", "prevvolunteerwork", 2020, 18, 60, 69, 47, 457, 57, 57, 57, true, true, true, true);
-
-        
-    }
-
-    public class Physical
-    {
-        public int WeightLift;
-        public bool PhysCandidate;
-
-        public Physical(int weightLift, bool physCandidate)
-        {
-            WeightLift = weightLift;
-            PhysCandidate = physCandidate;
-        }
-
-        public Physical()
-        {
-            Physical phys1 = new(234, true);
-        }
-
     }
 }

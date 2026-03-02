@@ -90,17 +90,26 @@ namespace COMP003A.Final
             string newOrigin = OriginRequest();
 
             // integer returns
-
+            int newBirthYear = BirthYearRequest();
+            int estimatedAge = (2026 - newBirthYear); // no method, calculation based on birth year
+            int newHeight = HeightRequest();
+            int newWeight = WeightRequest();
+            
+            int estimatedBMI = (newWeight / (newHeight * newHeight)); // based on height and weight NEED TO BE DOUBLE
+            int newExpectedHours = ExpectedHourRequest();
+            int newExperienceMonths = ExperienceMonthsRequest();
+            int newVolunteerHours = VolunteerHoursRequest();
+            int newApplicantNumber = 0; // 
 
             // conditional returns
 
             string newPrevVolunteering = PrevVolunteeringRequest();
+            int newWeightLift = WeightLiftRequest();
 
-
-            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, 2020, 18, 60, 45, 69, 47, 457, 57, 57, 57, true, true, true, true, true));
+            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, true, true, true, true, true));
        
 
-            // string request methods
+            // STRING request methods
             static string NameRequest()
             {
                 Console.WriteLine("Please enter your name: ");
@@ -138,7 +147,7 @@ namespace COMP003A.Final
                 return OriginInput;
             }
 
-            // CONDITIONAL - only asked if "yes" is answered to "Have you previously volunteered?"
+            // CONDITIONAL - only asked if "yes" was answered to "Have you previously volunteered?"
             static string PrevVolunteeringRequest()
             {
                 Console.WriteLine("Please state the most recent volunteer program you've participated in: ");
@@ -147,7 +156,51 @@ namespace COMP003A.Final
             }
 
 
-            // integer request methods
+            // NUMBER-BASSED request methods
+            static int BirthYearRequest()
+            {
+                Console.WriteLine("What year were you born in?: ");
+                int birthYearInput = IntegerVerification(Console.ReadLine());
+                return birthYearInput;
+            }
+            static int HeightRequest()
+            {
+                Console.WriteLine("How tall are you in inches (rounded to the nearest whole number)?: ");
+                int heightInput = IntegerVerification(Console.ReadLine());
+                return heightInput;
+            }
+            static int WeightRequest()
+            {
+                Console.WriteLine("How much do you weigh?: ");
+                int weightInput = IntegerVerification(Console.ReadLine());
+                return weightInput;
+            }
+            static int WeightLiftRequest() // CONDITIONAL - based on if "yes" was answered to "do you work out?"
+            {
+                Console.WriteLine("How much have you been able to bench press?: ");
+                int weightLiftInput = IntegerVerification(Console.ReadLine());
+                return weightLiftInput;
+            }
+            static int ExpectedHourRequest()
+            {
+                Console.WriteLine("How many hours do you expect to volunteer (per week)?: ");
+                int expectedHoursInput = IntegerVerification(Console.ReadLine());
+                return expectedHoursInput;
+            }
+            static int ExperienceMonthsRequest() // CONDITIONAL - only asked if "yes" was answered to "Have you previously volunteered?"
+            {
+                Console.WriteLine("How many months have you volunteered in total?: ");
+                int experienceMonthsInput = IntegerVerification(Console.ReadLine());
+                return experienceMonthsInput;
+            }
+            static int VolunteerHoursRequest() // CONDITIONAL - only asked if "yes" was answered to "Have you previously volunteered?"
+            {
+                Console.WriteLine("How many hours of volunteering do you have?: ");
+                int VolunteerInput = IntegerVerification(Console.ReadLine());
+                return VolunteerInput;
+            }
+
+            // BOOL request methods
         }
 
 
@@ -162,7 +215,7 @@ namespace COMP003A.Final
             foreach (Volunteer volunteer in volunteers)
             {
                 i++;
-                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town);
+                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + "Applicant #:" + volunteer.ApplicantNum);
 
             }
         }

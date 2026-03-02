@@ -20,6 +20,7 @@ namespace COMP003A.Final
             Menu(volunteers);
         }
 
+
         static void Menu(List<Volunteer> volunteers)
         {
         while (true)
@@ -76,14 +77,84 @@ namespace COMP003A.Final
                     }
         }
 
+
+        //User add logic
         static void Additions(List<Volunteer> volunteers)
         {
-            Console.WriteLine("\nPlease enter your name: ");
-            string nameInput = Console.ReadLine();
+            // non-conditional string returns
+            string newName = NameRequest();
+            string newRace = RaceRequest();
+            string newEyeColor = EyeRequest();
+            string newHairColor = HairRequest();
+            string newTown = TownRequest();
+            string newOrigin = OriginRequest();
 
-            volunteers.Add(new Volunteer(nameInput, "race", "eye", "hair", "town", "origin", "prevvolunteerwork", 2020, 18, 60, 45, 69, 47, 457, 57, 57, 57, true, true, true, true, true));
+            // integer returns
+
+
+            // conditional returns
+
+            string newPrevVolunteering = PrevVolunteeringRequest();
+
+
+            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, 2020, 18, 60, 45, 69, 47, 457, 57, 57, 57, true, true, true, true, true));
        
+
+            // string request methods
+            static string NameRequest()
+            {
+                Console.WriteLine("Please enter your name: ");
+                string nameInput = Console.ReadLine();
+                return nameInput;
+            }
+            static string RaceRequest()
+            {
+                Console.WriteLine("Please enter your race: ");
+                string raceInput = Console.ReadLine();
+                return raceInput;
+            }
+            static string EyeRequest()
+            {
+                Console.WriteLine("Please enter your eye color: ");
+                string EyeInput = Console.ReadLine();
+                return EyeInput;
+            }
+            static string HairRequest()
+            {
+                Console.WriteLine("Please enter your hair color: ");
+                string hairInput = Console.ReadLine();
+                return hairInput;
+            }
+            static string TownRequest()
+            {
+                Console.WriteLine("Please enter the town you reside in: ");
+                string TownInput = Console.ReadLine();
+                return TownInput;
+            }
+            static string OriginRequest()
+            {
+                Console.WriteLine("Please enter the state or country you were born in: ");
+                string OriginInput = Console.ReadLine();
+                return OriginInput;
+            }
+
+            // CONDITIONAL - only asked if "yes" is answered to "Have you previously volunteered?"
+            static string PrevVolunteeringRequest()
+            {
+                Console.WriteLine("Please state the most recent volunteer program you've participated in: ");
+                string prevVolunteeringInput = Console.ReadLine();
+                return prevVolunteeringInput;
+            }
+
+
+            // integer request methods
         }
+
+
+
+
+
+        // View all logic
         static void View(List<Volunteer> volunteers)
         {
             Console.WriteLine();
@@ -96,6 +167,8 @@ namespace COMP003A.Final
             }
         }
 
+
+        // Search logic
         static void Search(List<Volunteer> volunteers)
         {
             Console.Write("\nWho would you like to search for?: ");
@@ -108,6 +181,8 @@ namespace COMP003A.Final
             
         }
 
+
+        // Validation logic
         public static int IntegerVerification(string unverifiedInt)
         {
             try

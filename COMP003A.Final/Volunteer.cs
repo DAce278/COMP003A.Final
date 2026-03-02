@@ -30,8 +30,9 @@ namespace COMP003A.Final
         public bool CarryCandidate;
         public bool AttendingClasses;
         public bool OverReqAge;
+        public bool WorkOut;
 
-        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int weightLift, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool carryCandidate, bool attendingClasses, bool overReqAge)
+        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int weightLift, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool carryCandidate, bool attendingClasses, bool overReqAge, bool workOut)
         {
             Name = name;
             Race = race;
@@ -55,8 +56,23 @@ namespace COMP003A.Final
             CarryCandidate = carryCandidate;
             AttendingClasses = attendingClasses;
             OverReqAge = overReqAge;
+            WorkOut = workOut;
 
 
+        }
+
+    }
+    public class Physical
+    {
+        public string LastLifted;
+        public int WeightLift;
+        public bool CarryCandidate;
+
+        public Physical(string lastLifted, int weightLift, bool carryCandidate)
+        {
+            LastLifted = lastLifted;
+            WeightLift = weightLift;
+            CarryCandidate = carryCandidate;
         }
     }
 }

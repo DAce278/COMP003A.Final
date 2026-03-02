@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Channels;
 namespace COMP003A.Final
 {
     internal class Program
@@ -88,8 +84,9 @@ namespace COMP003A.Final
             string newHairColor = HairRequest();
             string newTown = TownRequest();
             string newOrigin = OriginRequest();
+            string newPrevVolunteering = PrevVolunteeringRequest();
 
-            // integer returns
+            // non-conditional integer returns
             int newBirthYear = BirthYearRequest();
             int estimatedAge = (2026 - newBirthYear); // no method, calculation based on birth year
             int newHeight = HeightRequest();
@@ -99,14 +96,29 @@ namespace COMP003A.Final
             int newExpectedHours = ExpectedHourRequest();
             int newExperienceMonths = ExperienceMonthsRequest();
             int newVolunteerHours = VolunteerHoursRequest();
-            int newApplicantNumber = 0; // 
+            int newApplicantNumber = 1;
+             
 
-            // conditional returns
+            // bool returns
+            bool newSex = SexRequest();
+            bool newPreviousVolunteering = PreviousVolunteeringRequest();
+            bool newAttendingClasses = AttendingClassesRequest();
+            bool newReqAge = ReqAgeRequest(estimatedAge);
+            bool newWorkOut = WorkOutRequest();
 
-            string newPrevVolunteering = PrevVolunteeringRequest();
-            int newWeightLift = WeightLiftRequest();
 
-            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, true, true, true, true, true));
+           
+            int newWeightLift = -1;
+            bool newCarryCandidate = false;
+
+            // workout condition returns
+            if (newWorkOut = true)
+            {
+                newWeightLift = WeightLiftRequest();
+                newCarryCandidate = CarryCandidateRequest(newWeightLift);
+            }
+
+            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, true, true, true, true, true));
        
 
             // STRING request methods
@@ -146,9 +158,7 @@ namespace COMP003A.Final
                 string OriginInput = Console.ReadLine();
                 return OriginInput;
             }
-
-            // CONDITIONAL - only asked if "yes" was answered to "Have you previously volunteered?"
-            static string PrevVolunteeringRequest()
+            static string PrevVolunteeringRequest() // CONDITIONAL - only asked if "yes" was answered to "Have you previously volunteered?"
             {
                 Console.WriteLine("Please state the most recent volunteer program you've participated in: ");
                 string prevVolunteeringInput = Console.ReadLine();
@@ -156,7 +166,7 @@ namespace COMP003A.Final
             }
 
 
-            // NUMBER-BASSED request methods
+            // NUMBER-BASED request methods
             static int BirthYearRequest()
             {
                 Console.WriteLine("What year were you born in?: ");
@@ -183,7 +193,7 @@ namespace COMP003A.Final
             }
             static int ExpectedHourRequest()
             {
-                Console.WriteLine("How many hours do you expect to volunteer (per week)?: ");
+                Console.WriteLine("How many hours do you expect to volunteer? (per week): ");
                 int expectedHoursInput = IntegerVerification(Console.ReadLine());
                 return expectedHoursInput;
             }
@@ -201,6 +211,75 @@ namespace COMP003A.Final
             }
 
             // BOOL request methods
+            static bool SexRequest()
+            {
+                bool sexIsMale = false;
+
+               
+                bool loopTrue = true;
+                while (loopTrue)
+                {
+                Console.WriteLine("What is your sex? (male/female): ");
+                string sexStringInput = Console.ReadLine().ToLower();
+
+                    if (sexStringInput == "male")
+                    {
+                        sexIsMale = true;
+                        loopTrue = false;
+                    }
+                    else if (sexStringInput == "female")
+                    {
+                        sexIsMale = false;
+                        loopTrue = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unknown answer. Try again.");
+                    }
+                }
+                return sexIsMale;
+            }
+            static bool PreviousVolunteeringRequest()
+            {
+                Console.WriteLine("Have you previously volunteered? (yes/no): ");
+                bool previousVolunteeringInput = YesNoVerification(Console.ReadLine());
+                return previousVolunteeringInput;
+            }
+            static bool CarryCandidateRequest(int newWeightLift)
+            {
+                bool carryCandidateInput = false;
+
+                if (newWeightLift >= 100)
+                {
+                    carryCandidateInput = true;
+                }
+                return carryCandidateInput;
+            }
+            static bool AttendingClassesRequest()
+            {
+                Console.WriteLine("Are you current attending any classes? (yes/no): ");
+                bool attendingClassesInput = YesNoVerification(Console.ReadLine());
+                return attendingClassesInput;
+            }
+            static bool ReqAgeRequest(int newAge)
+            {
+                bool over16 = false;
+                if (newAge < 16)
+                {
+                    over16 = false;
+                }
+                else
+                {
+                    over16 = true;
+                }
+                return over16;
+            }
+            static bool WorkOutRequest()
+            {
+                Console.WriteLine("Do you work out? (yes/no): ");
+                bool workOutInput = YesNoVerification (Console.ReadLine());
+                return workOutInput;
+            }
         }
 
 
@@ -215,7 +294,7 @@ namespace COMP003A.Final
             foreach (Volunteer volunteer in volunteers)
             {
                 i++;
-                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + "Applicant #:" + volunteer.ApplicantNum);
+                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + " - Applicant #:" + volunteer.ApplicantNum);
 
             }
         }
@@ -273,7 +352,6 @@ namespace COMP003A.Final
             }
             return isTrue;
         }
-
 
     }
 }

@@ -94,6 +94,7 @@ namespace COMP003A.Final
                     string sexString = SexConversion(volunteer); 
                     if (volunteer.Name == nameSearch)
                     {
+                        // Displays most fields
                         Console.WriteLine(volunteer.Name + ": " + volunteer.Age + " years old; Born in " + volunteer.BirthYear + " - Residing in " + volunteer.Town + "; Place of Origin - " + volunteer.AreaOfOrigin + "; Attending classes? - " + volunteer.AttendingClasses + "; Applicant #:" + volunteer.ApplicantNum);
                         Console.WriteLine("Physical Attributes: Race - " + volunteer.Race + "; Sex - " + sexString + "; Eye Color - " + volunteer.EyeColor + "; Hair Color - " + volunteer.HairColor + "; Height - " + volunteer.Height + "; Weight - " + volunteer.Weight + ", BMI - " + volunteer.bodyMass);
                             Console.Write("Volunteering Information: Expected hours - " + volunteer.ExpectedHours + "; Previously volunteered? - " + volunteer.PreviouslyVolunteered);
@@ -109,7 +110,7 @@ namespace COMP003A.Final
                         }
                         Console.Write("Physical capabilities: Workout - " + volunteer.WorkOut);
 
-                        // Condittionally shown stats based on previous volunteering
+                        // Condittionally shown stats based on work out value
                         if (volunteer.WorkOut == true)
                         {
                             Console.WriteLine("; Bench Press - " + volunteer.WeightLift + "; Carry Candidate? - " + volunteer.CarryCandidate);
@@ -150,6 +151,7 @@ namespace COMP003A.Final
             ExpecetedHoursStats(volunteers);
         }
 
+
         static public void AgeStats(List<Volunteer> volunteers)
         {
             int count = 0;
@@ -174,6 +176,7 @@ namespace COMP003A.Final
             int count = 0;
             int hourSum = 0;
             int hourAvg = 0;
+
             if (hourSum  > 0 || count > 0)
             {
                 hourSum = 0;
@@ -184,6 +187,7 @@ namespace COMP003A.Final
                 hourSum += volunteers[count].ExpectedHours;
                 count++;
             }
+
             hourAvg = hourSum / count;
             Console.WriteLine("\nAverage expected hours of volunteers: " + hourAvg);
         }

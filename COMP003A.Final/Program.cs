@@ -46,7 +46,7 @@ namespace COMP003A.Final
                             // View
                             case "2":
 
-                                View();
+                                Volunteer.DisplayInfo(volunteers);
                                 continue;
 
                             // Search
@@ -95,8 +95,8 @@ namespace COMP003A.Final
             int estimatedAge = (2026 - newBirthYear); // no method, calculation based on birth year
             int newHeight = HeightRequest();
             int newWeight = WeightRequest();
-            
             int estimatedBMI = (703 * newWeight / (newHeight * newHeight)); // based on height and weight
+            int newWeightLift = -1;
             int newExpectedHours = ExpectedHourRequest();
             int newExperienceMonths = 0;
             int newVolunteerHours = 0;
@@ -108,27 +108,27 @@ namespace COMP003A.Final
             bool newPreviousVolunteering = PreviousVolunteeringRequest(); // Opens up new questions if true
             bool newAttendingClasses = AttendingClassesRequest();
             bool newReqAge = ReqAgeRequest(estimatedAge);
+            bool newCarryCandidate = false;
             bool newWorkOut = WorkOutRequest(); // Opens up new questions if true
 
 
            
-            int newWeightLift = -1;
-            bool newCarryCandidate = false;
-
             // workout condition returns
             if (newWorkOut == true)
             {
                 newWeightLift = WeightLiftRequest();
-                newCarryCandidate = CarryCandidateRequest(newWeightLift);
-                newPrevVolunteering = PrevVolunteeringRequest();                
+                newCarryCandidate = CarryCandidateRequest(newWeightLift);                
             }
 
+            // past volunteering condition returns
             if (newPreviousVolunteering == true)
             {
                 newExperienceMonths = ExperienceMonthsRequest();
                 newVolunteerHours = VolunteerHoursRequest();
                 newPrevVolunteering = PrevVolunteeringRequest();
             }
+
+
 
             volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, newPreviousVolunteering, newWorkOut, newAttendingClasses, newReqAge, newCarryCandidate));
        
@@ -299,16 +299,7 @@ namespace COMP003A.Final
             }
         }
 
-
-
-        // View all logic
-        static void View()
-        {
-            Volunteer.DisplayInfo(volunteers);
-        }
-
-
-        // Validation logic
+        // General Validation Logic
         public static int IntegerVerification(string unverifiedInt)
         {
             try

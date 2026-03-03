@@ -57,7 +57,7 @@ namespace COMP003A.Final
                             // Stats
                             case "4":
 
-                                Stats();
+                                Volunteer.Statistics(volunteers);
                                 continue;
                         
                             // Exit
@@ -79,6 +79,7 @@ namespace COMP003A.Final
         static void Additions()
         {
             // Only conditionally reqested fields are initialized with a default value
+
             // String returns
             string newName = NameRequest();
             string newRace = RaceRequest();
@@ -89,7 +90,7 @@ namespace COMP003A.Final
             string newPrevVolunteering = "";
 
 
-            // non-conditional integer returns
+            // Integer returns
             int newBirthYear = BirthYearRequest();
             int estimatedAge = (2026 - newBirthYear); // no method, calculation based on birth year
             int newHeight = HeightRequest();
@@ -102,7 +103,7 @@ namespace COMP003A.Final
             int newApplicantNumber = 1;
              
 
-            // bool returns
+            // Bool returns
             bool newSex = SexRequest();
             bool newPreviousVolunteering = PreviousVolunteeringRequest(); // Opens up new questions if true
             bool newAttendingClasses = AttendingClassesRequest();
@@ -131,6 +132,8 @@ namespace COMP003A.Final
 
             volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, newPreviousVolunteering, newWorkOut, newAttendingClasses, newReqAge, newCarryCandidate));
        
+
+
 
             // STRING request methods
             static string NameRequest()
@@ -177,6 +180,7 @@ namespace COMP003A.Final
             }
 
 
+
             // NUMBER-BASED request methods
             static int BirthYearRequest()
             {
@@ -220,6 +224,8 @@ namespace COMP003A.Final
                 int VolunteerInput = IntegerVerification(Console.ReadLine());
                 return VolunteerInput;
             }
+
+
 
             // BOOL request methods
             static bool SexRequest()
@@ -295,16 +301,10 @@ namespace COMP003A.Final
 
 
 
-
-
         // View all logic
         static void View()
         {
             Volunteer.DisplayInfo(volunteers);
-        }
-        static void Stats()
-        {
-            
         }
 
 

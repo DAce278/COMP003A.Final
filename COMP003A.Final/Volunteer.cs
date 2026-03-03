@@ -62,13 +62,20 @@ namespace COMP003A.Final
         }
         static public void DisplayInfo(List<Volunteer> volunteers)
         {
-            Console.WriteLine("\nVolunteer Applicants: ");
-            int i = 0;
-            foreach (Volunteer volunteer in volunteers)
+            if (volunteers.Count > 0)
             {
-                i++;
-                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + " - Applicant #:" + volunteer.ApplicantNum);
+                Console.WriteLine("\nVolunteer Applicants: ");
+                int i = 0;
+                foreach (Volunteer volunteer in volunteers)
+                {
+                    i++;
+                    Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + " - Applicant #:" + volunteer.ApplicantNum);
 
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nNo users found");
             }
         }
         static public void NameSearch(List<Volunteer> volunteers)
@@ -78,18 +85,41 @@ namespace COMP003A.Final
                 Console.Write("\nEnter the name of who you would like to search for: ");
                 string nameSearch = "";
                 nameSearch = Console.ReadLine();
+
+                Console.WriteLine("\nDisplaying profiles with the name " + nameSearch + ":\n");
             
                 foreach (Volunteer volunteer in volunteers)
                 {
                     if (volunteer.Name == nameSearch)
                     {
-                        Console.WriteLine(volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + "");
+                        Console.WriteLine(volunteer.Name + ": " + volunteer.Age + " years old; Born in " + volunteer.BirthYear + " - Residing in " + volunteer.Town + "; Place of Origin - " + volunteer.AreaOfOrigin + "; Attending classes? - " + volunteer.AttendingClasses + "; Applicant #:" + volunteer.ApplicantNum);
+                        Console.WriteLine("Physical Attributes: Race - " + volunteer.Race + "; Sex - " + volunteer.Sex + "; Eye Color - " + volunteer.EyeColor + "; Hair Color - " + volunteer.HairColor + "; Height - " + volunteer.Height + "; Weight - " + volunteer.Weight + ", BMI - " + volunteer.bodyMass);
+                            Console.Write("Volunteering Information: Expected hours - " + volunteer.ExpectedHours + "; Previously volunteered? - " + volunteer.PreviouslyVolunteered);
+                        
+                        if (volunteer.PreviouslyVolunteered == true)
+                        {
+                            Console.WriteLine("; Previous Volunteering Role - " + volunteer.PreviousVolunteerPosition + "; Volunteer Hours - " + volunteer.VolunteerHours + "; Total Months Spent Volunteering - " + volunteer.ExperienceMonths);
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                        }
+                        Console.Write("Physical capabilities: Workout - " + volunteer.WorkOut);
+
+                        if (volunteer.WorkOut == true)
+                        {
+                            Console.WriteLine("; Bench Press - " + volunteer.WeightLift + "; Carry Candidate? - " + volunteer.CarryCandidate);
+                        }
+                        else
+                        {
+                            Console.WriteLine("; Rest Unknown"); 
+                        }
                     }
                 }
             }
             else
             {
-                Console.WriteLine("\nNo users created.");
+                Console.WriteLine("\nNo users found.");
             }
         }
 

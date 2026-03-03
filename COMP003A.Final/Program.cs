@@ -51,7 +51,7 @@ namespace COMP003A.Final
 
                             // Search
                             case "3":
-                        Volunteer.NameSearch(volunteers);
+                                Volunteer.NameSearch(volunteers);
                                 continue;
 
                             // Stats
@@ -78,14 +78,16 @@ namespace COMP003A.Final
         //User add logic
         static void Additions()
         {
-            // non-conditional string returns
+            // Only conditionally reqested fields are initialized with a default value
+            // String returns
             string newName = NameRequest();
             string newRace = RaceRequest();
             string newEyeColor = EyeRequest();
             string newHairColor = HairRequest();
             string newTown = TownRequest();
             string newOrigin = OriginRequest();
-            string newPrevVolunteering = PrevVolunteeringRequest();
+            string newPrevVolunteering = "";
+
 
             // non-conditional integer returns
             int newBirthYear = BirthYearRequest();
@@ -93,7 +95,7 @@ namespace COMP003A.Final
             int newHeight = HeightRequest();
             int newWeight = WeightRequest();
             
-            int estimatedBMI = (newWeight / (newHeight * newHeight)); // based on height and weight NEED TO BE DOUBLE
+            int estimatedBMI = (703 * newWeight / (newHeight * newHeight)); // based on height and weight
             int newExpectedHours = ExpectedHourRequest();
             int newExperienceMonths = 0;
             int newVolunteerHours = 0;
@@ -117,13 +119,14 @@ namespace COMP003A.Final
             {
                 newWeightLift = WeightLiftRequest();
                 newCarryCandidate = CarryCandidateRequest(newWeightLift);
-                
+                newPrevVolunteering = PrevVolunteeringRequest();                
             }
 
             if (newPreviousVolunteering == true)
             {
                 newExperienceMonths = ExperienceMonthsRequest();
                 newVolunteerHours = VolunteerHoursRequest();
+                newPrevVolunteering = PrevVolunteeringRequest();
             }
 
             volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, newPreviousVolunteering, newWorkOut, newAttendingClasses, newReqAge, newCarryCandidate));
@@ -343,6 +346,5 @@ namespace COMP003A.Final
                 }
             return isTrue;
         }
-
     }
 }

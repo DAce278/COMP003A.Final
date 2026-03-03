@@ -32,7 +32,7 @@ namespace COMP003A.Final
         public bool OverReqAge;
         public bool WorkOut;
 
-        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int weightLift, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool carryCandidate, bool attendingClasses, bool overReqAge, bool workOut)
+        public Volunteer(string name, string race, string eyeColor, string hairColor, string town, string areaOfOrigin, string previousVolunteerPosition, int birthYear, int age, int height, int expectedHours, int experienceMonths, int volunteerHours, int weight, int weightLift, int bodyMass, int applicantNum, bool sex, bool previouslyVolunteered, bool workOut, bool attendingClasses, bool overReqAge, bool carryCandidate)
         {
             Name = name;
             Race = race;
@@ -60,19 +60,38 @@ namespace COMP003A.Final
 
 
         }
-
-    }
-    public class Physical
-    {
-        public string LastLifted;
-        public int WeightLift;
-        public bool CarryCandidate;
-
-        public Physical(string lastLifted, int weightLift, bool carryCandidate)
+        static public void DisplayInfo(List<Volunteer> volunteers)
         {
-            LastLifted = lastLifted;
-            WeightLift = weightLift;
-            CarryCandidate = carryCandidate;
+            Console.WriteLine("\nVolunteer Applicants: ");
+            int i = 0;
+            foreach (Volunteer volunteer in volunteers)
+            {
+                i++;
+                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + " - Applicant #:" + volunteer.ApplicantNum);
+
+            }
         }
+        static public void NameSearch(List<Volunteer> volunteers)
+        {
+            if (volunteers.Count > 0)
+            {
+                Console.Write("\nEnter the name of who you would like to search for: ");
+                string nameSearch = "";
+                nameSearch = Console.ReadLine();
+            
+                foreach (Volunteer volunteer in volunteers)
+                {
+                    if (volunteer.Name == nameSearch)
+                    {
+                        Console.WriteLine(volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + "");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nNo users created.");
+            }
+        }
+
     }
 }

@@ -3,22 +3,25 @@ namespace COMP003A.Final
 {
     internal class Program
     {
+        
+        static public List<Volunteer> volunteers = new List<Volunteer>();
+        public int i = 1;
         static void Main(string[] args)
         {
-
-            List<Volunteer> volunteers = new List<Volunteer>();
-
             Console.WriteLine("-------------------------------------\n" +
                               "Welcome to the Volunteer database!\n" +
                               "-------------------------------------");
             
 
-            Menu(volunteers);
+            Menu();
         }
+    
 
-
-        static void Menu(List<Volunteer> volunteers)
+        static void Menu()
         {
+            
+
+
         while (true)
                     {
                         Console.Write("\n" +
@@ -37,25 +40,24 @@ namespace COMP003A.Final
                             //Add
                             case "1":
                         
-                                Additions(volunteers);
+                                Additions();
                                 continue;
 
                             // View
                             case "2":
 
-                                View(volunteers);
+                                View();
                                 continue;
 
                             // Search
                             case "3":
-
-                                Search(volunteers);
+                        Volunteer.NameSearch(volunteers);
                                 continue;
 
                             // Stats
                             case "4":
 
-                                Stats(volunteers);
+                                Stats();
                                 continue;
                         
                             // Exit
@@ -73,9 +75,8 @@ namespace COMP003A.Final
                     }
         }
 
-
         //User add logic
-        static void Additions(List<Volunteer> volunteers)
+        static void Additions()
         {
             // non-conditional string returns
             string newName = NameRequest();
@@ -94,17 +95,17 @@ namespace COMP003A.Final
             
             int estimatedBMI = (newWeight / (newHeight * newHeight)); // based on height and weight NEED TO BE DOUBLE
             int newExpectedHours = ExpectedHourRequest();
-            int newExperienceMonths = ExperienceMonthsRequest();
-            int newVolunteerHours = VolunteerHoursRequest();
+            int newExperienceMonths = 0;
+            int newVolunteerHours = 0;
             int newApplicantNumber = 1;
              
 
             // bool returns
             bool newSex = SexRequest();
-            bool newPreviousVolunteering = PreviousVolunteeringRequest();
+            bool newPreviousVolunteering = PreviousVolunteeringRequest(); // Opens up new questions if true
             bool newAttendingClasses = AttendingClassesRequest();
             bool newReqAge = ReqAgeRequest(estimatedAge);
-            bool newWorkOut = WorkOutRequest();
+            bool newWorkOut = WorkOutRequest(); // Opens up new questions if true
 
 
            
@@ -112,13 +113,20 @@ namespace COMP003A.Final
             bool newCarryCandidate = false;
 
             // workout condition returns
-            if (newWorkOut = true)
+            if (newWorkOut == true)
             {
                 newWeightLift = WeightLiftRequest();
                 newCarryCandidate = CarryCandidateRequest(newWeightLift);
+                
             }
 
-            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, true, true, true, true, true));
+            if (newPreviousVolunteering == true)
+            {
+                newExperienceMonths = ExperienceMonthsRequest();
+                newVolunteerHours = VolunteerHoursRequest();
+            }
+
+            volunteers.Add(new Volunteer(newName, newRace, newEyeColor, newHairColor, newTown, newOrigin, newPrevVolunteering, newBirthYear, estimatedAge, newHeight, newExpectedHours, newExperienceMonths, newVolunteerHours, newWeight, newWeightLift, estimatedBMI, newApplicantNumber, newSex, newPreviousVolunteering, newWorkOut, newAttendingClasses, newReqAge, newCarryCandidate));
        
 
             // STRING request methods
@@ -287,28 +295,11 @@ namespace COMP003A.Final
 
 
         // View all logic
-        static void View(List<Volunteer> volunteers)
+        static void View()
         {
-            Console.WriteLine();
-            int i = 0;
-            foreach (Volunteer volunteer in volunteers)
-            {
-                i++;
-                Console.WriteLine(i + ". " + volunteer.Name + ": " + volunteer.Age + " years old - Residing in " + volunteer.Town + " - Applicant #:" + volunteer.ApplicantNum);
-
-            }
+            Volunteer.DisplayInfo(volunteers);
         }
-
-
-        // Search logic
-        static void Search(List<Volunteer> volunteers)
-        {
-            Console.Write("\nWho would you like to search for?: ");
-            string nameSearch = "";
-            nameSearch = Console.ReadLine();
-        }
-
-        static void Stats(List<Volunteer> volunteers)
+        static void Stats()
         {
             
         }
@@ -335,21 +326,21 @@ namespace COMP003A.Final
 
         public static bool YesNoVerification(string unverifiedBool)
         {
-            bool isTrue;
+            bool isTrue = false;
 
-            if (unverifiedBool == "yes")
-            {
-                isTrue = true;
-            }
-            else if (unverifiedBool == "no")
-            {
-                isTrue = false;
-            }
-            else
-            {
-                Console.WriteLine("Unknown response.");
-                isTrue = false;
-            }
+                if (unverifiedBool == "yes")
+                {
+                    isTrue = true;
+                }
+                else if (unverifiedBool == "no")
+                {
+                    isTrue = false;
+                }
+                else
+                {
+                    Console.WriteLine("Unknown response.");
+                    isTrue = false;
+                }
             return isTrue;
         }
 
